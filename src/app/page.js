@@ -1,9 +1,21 @@
+'use client';
+
 import Image from "next/image";
 import styles from "./page.module.css";
 
+import { useAuth } from './context/AuthContext';
+import Login from './Login';
+
 export default function Home() {
+  const { user, logOut } = useAuth();
+
+  if (!user) {
+    return <Login />;
+  }
+
   return (
     <main className={styles.main}>
+      <button onClick={logOut}>Sign out</button>
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
